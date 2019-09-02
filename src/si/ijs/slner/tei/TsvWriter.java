@@ -25,14 +25,21 @@ public class TsvWriter {
 	public static void writeSentence(Writer wri, List<Token> sentence)
 			throws IOException {
 		for (Token tok : sentence) {
-			wri.write(tok.getLiteral());
-			wri.write('\t');
+			if(tok.getLiteral() == null) {
+				continue;
+			}
+			if(tok.getLiteral() != null) {
+				wri.write(tok.getLiteral());
+				wri.write('\t');
+			}
 			if (tok.getLemma() != null) {
 				wri.write(tok.getLemma());
 				wri.write('\t' );
 			}
-			wri.write(tok.getPos());
-			wri.write('\t');
+			if(tok.getPos() != null) {
+				wri.write(tok.getPos());
+				wri.write('\t');
+			}
 
 			if (tok.getTokenClass() != null) {
 				wri.write(tok.getTokenClass());
